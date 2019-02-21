@@ -15,8 +15,9 @@ instance Show Vec where
 
 showVec :: Vec -> String
 showVec (ColumnVec x) = "[\n" ++ dispColVec (ColumnVec x)
-showVec (RowVec x)    = "[" ++ foldr (\y accum -> " " ++ (show y) ++ accum) " ]" x
+showVec (RowVec x)    = "[" ++ foldr (\y accum -> " " ++ (show y) ++ accum) " ]" x -- Lambda function to foldr to reduce RowVec
 
+-- Pattern matching to recursively display ColumnVec
 dispColVec :: Vec -> String
 dispColVec (ColumnVec []) = "  ]\n"
 dispColVec (ColumnVec (x:xs)) = " " ++ (show x) ++ "\n" ++ (dispColVec (ColumnVec xs))
