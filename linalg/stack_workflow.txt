@@ -1,9 +1,22 @@
-# init NEW project
-stack new
 # stack templates, view templates for new build
 stack templates
+# init NEW project
+stack new
+# boiler plate and generated files:
+#   Setup.hs
+#   stack.yaml (can be modified)
+#   package.yaml (can be modified)
+#   linalg.cabal (not to be modified)
+#   app, src, and test dirs
+
+# setup, not sure what this did
+stack setup
+
 # build project
 stack build
 
 # use ghci
 stack ghci
+
+# run tests. Not sure why this is the only way that I can run test.
+runhaskell -isrc -itest test/VecSpec.hs
