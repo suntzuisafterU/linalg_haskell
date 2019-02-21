@@ -4,8 +4,17 @@ module Vec where
 
 import           Frac
 
-data Vec = ColumnVec [ Frac ] | RowVec [ Frac ]
+-- TODO: implement a typeclass for Vectors and Matrices together, then one for each separately
+-- class 
+
+type Coeffs = [ Frac ]
+
+data Vec = ColumnVec Coeffs | RowVec Coeffs
   deriving (Eq)
+
+getCoeffs :: Vec -> Coeffs
+getCoeffs (ColumnVec u) = u
+getCoeffs (RowVec u)    = u
 
 instance Show Vec where
   show = showVec
@@ -19,6 +28,8 @@ dispColVec :: Vec -> String
 dispColVec (ColumnVec []) = "  ]\n"
 dispColVec (ColumnVec (x:xs)) = " " ++ (show x) ++ "\n" ++ (dispColVec (ColumnVec xs))
 
+dot :: Vec -> Vec -> Integer
+dot u v = undefined
 
 -- Record syntax, auto generates functions to lookup fields of the record.
 -- data Person = Person { firstName :: String

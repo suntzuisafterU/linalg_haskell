@@ -54,7 +54,7 @@ instance Num Frac where
 instance Fractional Frac where
   x / y        = multiplyFracs x (recip y)
   recip        = inverseFrac
-  fromRational = fromRational
+--  fromRational = fromRational
 
 
 -- Use Bool operators on the Fractional value of 2 Frac instances
