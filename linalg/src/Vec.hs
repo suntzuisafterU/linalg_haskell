@@ -7,11 +7,13 @@ import           Frac
 -- TODO: implement a typeclass for Vectors and Matrices together, then one for each separately
 -- class 
 
+-- type synonym for concise
 type Coeffs = [ Frac ]
 
 data Vec = ColumnVec Coeffs | RowVec Coeffs
   deriving (Eq)
 
+-- Retrieve the Coeffs for calculations
 getCoeffs :: Vec -> Coeffs
 getCoeffs (ColumnVec u) = u
 getCoeffs (RowVec u)    = u
