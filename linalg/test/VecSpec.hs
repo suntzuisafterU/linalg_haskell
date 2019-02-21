@@ -16,3 +16,9 @@ main = hspec $ do
       (RowVec [1,2,3]) == (RowVec [1,2,3]) `shouldBe` True
     it "RowVecs with the same entries in a different order should NOT be equal" $
       (RowVec [1,3,2]) == (RowVec [1,2,3]) `shouldBe` False
+
+  describe "dot product" $ do
+    it "Zero vector dot anything is zero vectore" $
+      (ColumnVec [0,0,0]) `dot` (ColumnVec [1,2,3]) `shouldBe` 0
+    it "[1,2,3] `dot` [4,5,6] `shouldBe` 32" $
+      (ColumnVec [1,2,3]) `dot` (RowVec [4,5,6]) `shouldBe` 32
