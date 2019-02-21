@@ -20,7 +20,6 @@ dispColVec (ColumnVec []) = "  ]\n"
 dispColVec (ColumnVec (x:xs)) = " " ++ (show x) ++ "\n" ++ (dispColVec (ColumnVec xs))
 
 
-
 -- Record syntax, auto generates functions to lookup fields of the record.
 -- data Person = Person { firstName :: String
 --                      , lastName :: String
