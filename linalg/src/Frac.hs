@@ -1,14 +1,12 @@
 module Frac where
 
 
--- Problem 3 [35 Points]. Declare a data type Frac— for handling fractions -- where each number is a (numerator, denominator) pair of integers representing the numerator and the denominator of the fraction. For example, (22, 23) would represent 22 / 23.  The numerator can be positive or negative, and the denominator must always be positive. 
+-- Problem 3 [35 Points]. Declare a data type Frac— for handling fractions -- where each number is a (numerator, denominator) pair of integers representing the numerator and the denominator of the fraction. For example, (22, 23) would represent 22 / 23.  The numerator can be positive or negative, and the denominator must always be positive.
 
-data Frac = Frac (Integer, Integer) 
+data Frac = Frac (Integer, Integer)
 
 instance Show Frac where
   show = showFrac
-    -- | d == 1    = show (n)
-    -- | otherwise             = show (Frac (n, d))
 
 showFrac :: Frac -> String
 showFrac x
@@ -22,7 +20,7 @@ numerator (Frac (n, _)) = n
 denominator :: Frac -> Integer
 denominator (Frac (_, d)) = d
 
--- Carefully pick Haskell's built-in type classes which this type should be an instance of.  You should define — and when meaningful overload — simple arithmetic and comparison operations on these fractions (at least: *, /, +, -, neg (negation), <=, >=, <, >, ==).  Also define functions numerator and denominator to return the numerator and denominator, and functions whole and fractional to extract the whole and the fractional part of the fraction.  For example, for (23, 22), whole should return 1, and fraction should return 1 / 22.  Function fractional should return a Frac data type.  
+-- Carefully pick Haskell's built-in type classes which this type should be an instance of.  You should define — and when meaningful overload — simple arithmetic and comparison operations on these fractions (at least: *, /, +, -, neg (negation), <=, >=, <, >, ==).  Also define functions numerator and denominator to return the numerator and denominator, and functions whole and fractional to extract the whole and the fractional part of the fraction.  For example, for (23, 22), whole should return 1, and fraction should return 1 / 22.  Function fractional should return a Frac data type.
 
 -- Return whole portion of a Frac instance
 whole :: Frac -> Integer
@@ -66,7 +64,7 @@ compareFrac f x y = f (evalFrac x) (evalFrac y)
 -- Apply Num operators that require 2 Frac instances in commonDenominator form
 -- see: (+), (-)
 commonOperateFrac :: (Integer -> Integer -> Integer) -> Frac -> Frac -> Frac
-commonOperateFrac f x y = 
+commonOperateFrac f x y =
   simplify(
     Frac(
       f (numerator x') (numerator y'),
@@ -106,16 +104,16 @@ signumFrac x = Frac(signum (numerator x), 1)
 ------------------------------------------------------------------------------
 
 -- Calculate the common denominator value of x when associated with y
--- Example: 
+-- Example:
 --    commonDenominator Frac(1,2) Frac(1,3)
---  returns:  
+--  returns:
 --    Frac(3,6)
 commonDenominator :: Frac -> Frac -> Frac
 commonDenominator x y = Frac (
                           (numerator x) * (denominator y),
                           (denominator x) * (denominator y)
                         )
-                      
+
 -- Evaluate a Frac instance as a Fractional number
 evalFrac :: Fractional(a) => Frac -> a
 evalFrac x = (fromInteger (numerator x)) / (fromInteger (denominator x))
