@@ -1,12 +1,8 @@
 module Lib where
-    -- ( someFunc
-    -- , module Frac
+    -- ( module Frac
     -- ) where
 
 import           Frac
-
-someFunc :: IO ()
-someFunc = putStrLn "someFunc"
 
 data Vec = ColumnVec [ Frac ] | RowVec [ Frac ]
 
