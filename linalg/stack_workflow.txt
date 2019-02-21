@@ -1,0 +1,9 @@
+# init NEW project
+stack new
+# stack templates, view templates for new build
+stack templates
+# build project
+stack build
+
+# use ghci
+stack ghci
