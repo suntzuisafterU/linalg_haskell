@@ -5,6 +5,7 @@ module Vec where
 import           Frac
 
 data Vec = ColumnVec [ Frac ] | RowVec [ Frac ]
+  deriving (Eq)
 
 instance Show Vec where
   show = showVec
@@ -17,6 +18,8 @@ showVec (RowVec x)    = "[" ++ foldr (\y accum -> " " ++ (show y) ++ accum) " ]"
 dispColVec :: Vec -> String
 dispColVec (ColumnVec []) = "  ]\n"
 dispColVec (ColumnVec (x:xs)) = " " ++ (show x) ++ "\n" ++ (dispColVec (ColumnVec xs))
+
+
 
 -- Record syntax, auto generates functions to lookup fields of the record.
 -- data Person = Person { firstName :: String
