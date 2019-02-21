@@ -1,4 +1,4 @@
-module Lib where
+module Vec where
     -- ( module Frac
     -- ) where
 
