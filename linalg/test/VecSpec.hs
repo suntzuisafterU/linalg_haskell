@@ -2,13 +2,11 @@
 
 module VecSpec (spec) where
 
-import           Test.Hspec
+import Test.Hspec
 import Test.QuickCheck
 import Test.QuickCheck.All
-import           Vec
+import Vec
 
--- main :: IO ()
--- main = hspec $ do
 spec :: Spec
 spec = do
   describe "instance of Eq" $ do
