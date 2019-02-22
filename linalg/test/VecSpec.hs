@@ -1,10 +1,16 @@
-module VecSpec where
+{-# LANGUAGE TemplateHaskell #-}
+
+module VecSpec (spec) where
 
 import           Test.Hspec
+import Test.QuickCheck
+import Test.QuickCheck.All
 import           Vec
 
-main :: IO ()
-main = hspec $ do
+-- main :: IO ()
+-- main = hspec $ do
+spec :: Spec
+spec = do
   describe "instance of Eq" $ do
     it "ColumnVec should not equal RowVec with same numbers" $
       (ColumnVec [1,2,3]) == (RowVec [1,2,3]) `shouldBe` False
@@ -22,3 +28,11 @@ main = hspec $ do
       (ColumnVec [0,0,0]) `dot` (ColumnVec [1,2,3]) `shouldBe` 0
     it "[1,2,3] `dot` [4,5,6] `shouldBe` 32" $
       (ColumnVec [1,2,3]) `dot` (RowVec [4,5,6]) `shouldBe` 32
+
+  describe "read" $ do
+    it "is the inverse of show" $ property $
+      \x -> (read . show) x == (x :: Int)
+
+  -- describe "magnitude of a vector u = sqrt (u `dot` u)" $ do
+  --   it "magnitude of [1,2,3]" $
+  --     mag (ColumnVec [1,2,3]) `shouldBe` 0 -- TODO: calc mag

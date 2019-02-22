@@ -19,4 +19,11 @@ stack build
 stack ghci
 
 # run tests. Not sure why this is the only way that I can run test.
-runhaskell -isrc -itest test/VecSpec.hs
+-----runhaskell -isrc -itest test/VecSpec.hs----------
+# Use automatic test driver discovery instead
+runhaskell -isrc -itest test/Spec.hs
+# IMPORTANT: Every test driver must have the name <ModuleNameSpec.hs> and contain 
+# a top level export of type spec (see VecSpec for an example of how to replace 
+# the main function with 
+# spec :: Spec 
+# spec = do
