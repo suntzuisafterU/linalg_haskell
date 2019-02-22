@@ -8,4 +8,7 @@ import Test.QuickCheck.All
 import Lib
 
 spec :: Spec
-spec = undefined
+spec = do
+  describe "read" $ do
+    it "is the inverse of show" $ property $
+      \x -> (read . show) x == (x :: Int)

@@ -34,3 +34,7 @@ spec = do
   -- describe "magnitude of a vector u = sqrt (u `dot` u)" $ do
   --   it "magnitude of [1,2,3]" $
   --     mag (ColumnVec [1,2,3]) `shouldBe` 0 -- TODO: calc mag
+
+
+
+

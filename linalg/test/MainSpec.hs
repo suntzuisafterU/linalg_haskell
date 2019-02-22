@@ -5,7 +5,9 @@ module MainSpec (spec) where
 import Test.Hspec
 import Test.QuickCheck
 import Test.QuickCheck.All
-import Main
 
 spec :: Spec
-spec = undefined
+spec = do
+  describe "read" $ do
+    it "is the inverse of show" $ property $
+      \x -> (read . show) x == (x :: Int)
