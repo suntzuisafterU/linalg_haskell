@@ -1,8 +1,5 @@
 module Frac where
 
-
--- Problem 3 [35 Points]. Declare a data type Frac— for handling fractions -- where each number is a (numerator, denominator) pair of integers representing the numerator and the denominator of the fraction. For example, (22, 23) would represent 22 / 23.  The numerator can be positive or negative, and the denominator must always be positive.
-
 data Frac = Frac (Integer, Integer)
 
 instance Show Frac where
@@ -20,15 +17,13 @@ numerator (Frac (n, _)) = n
 denominator :: Frac -> Integer
 denominator (Frac (_, d)) = d
 
--- Carefully pick Haskell's built-in type classes which this type should be an instance of.  You should define — and when meaningful overload — simple arithmetic and comparison operations on these fractions (at least: *, /, +, -, neg (negation), <=, >=, <, >, ==).  Also define functions numerator and denominator to return the numerator and denominator, and functions whole and fractional to extract the whole and the fractional part of the fraction.  For example, for (23, 22), whole should return 1, and fraction should return 1 / 22.  Function fractional should return a Frac data type.
-
 -- Return whole portion of a Frac instance
 whole :: Frac -> Integer
 whole x = (numerator x) `div` (denominator x)
 
 -- Return fractional portion of a Frac instance
 fractional :: Frac -> Frac
-fractional x = Frac(
+fractional x = signum x * Frac(
                 (numerator x) `mod` (denominator x),
                 (denominator x)
                )
@@ -42,6 +37,9 @@ instance Ord Frac where
   (>)          = compareFrac (>)
   (>=)         = compareFrac (>=)
 
+instance Real Frac where
+  toRational = \x -> (((fromIntegral.numerator) x) / ((fromIntegral.denominator) x))
+
 instance Num Frac where
   (+)          = commonOperateFrac (+)
   (-)          = commonOperateFrac (-)
@@ -54,8 +52,35 @@ instance Num Frac where
 instance Fractional Frac where
   x / y        = multiplyFracs x (recip y)
   recip        = inverseFrac
---  fromRational = fromRational
+  -- fromRational = error "fromRational not implemented" -- We are not implementing this
 
+-- same as properFraction from RealFrac typeclass
+-- properties:
+--   takes Real Frac x and returns n+f such that:
+--      n is an integral number with the same sign as x and
+--      f is a fraction of the same type and sign as x and
+--        has abs value less than 1
+propFrac :: Frac -> (Integer, Frac)
+propFrac x = ((whole x),(fractional x))
+
+-- Replace required Floating definitions
+-- replaces sqrt,
+fsqrt :: Floating a => Frac -> a
+fsqrt x = (sqrt.toRational') x
+
+-- Trig definitions for magnitude function on Vec data type
+fsin :: Floating a => Frac -> a
+fsin x = (sin.toRational') x
+
+fcos :: Floating a => Frac -> a
+fcos x = (cos.toRational') x
+
+ftan :: Floating a => Frac -> a
+ftan x = (tan.toRational') x
+
+-- convert to Rational number for computations
+toRational' :: Fractional a => Frac -> a
+toRational' x = (((fromIntegral.numerator) x) / ((fromIntegral.denominator) x))
 
 -- Use Bool operators on the Fractional value of 2 Frac instances
 compareFrac :: Fractional(a) => (a -> a -> Bool) -> Frac -> Frac -> Bool
