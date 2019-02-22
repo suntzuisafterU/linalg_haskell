@@ -2,10 +2,10 @@ module Vec where
     -- ( module Frac
     -- ) where
 
-import           Frac
+import Frac
 
 -- TODO: implement a typeclass for Vectors and Matrices together, then one for each separately
--- class 
+-- class
 
 -- type synonym for concise
 type Coeffs = [ Frac ]
@@ -32,6 +32,9 @@ dispColVec (ColumnVec (x:xs)) = " " ++ (show x) ++ "\n" ++ (dispColVec (ColumnVe
 
 dot :: Vec -> Vec -> Frac
 dot u v = sum (zipWith (*) (getCoeffs u) (getCoeffs v))
+
+-- mag :: Vec -> Frac
+-- mag u = 
 
 -- Record syntax, auto generates functions to lookup fields of the record.
 -- data Person = Person { firstName :: String
