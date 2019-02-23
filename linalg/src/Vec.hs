@@ -30,12 +30,6 @@ dispColVec :: Vec -> String
 dispColVec (ColumnVec []) = "  ]\n"
 dispColVec (ColumnVec (x:xs)) = " " ++ (show x) ++ "\n" ++ (dispColVec (ColumnVec xs))
 
-dot :: Vec -> Vec -> Frac
-dot u v = sum (zipWith (*) (getCoeffs u) (getCoeffs v))
-
--- mag :: Vec -> Frac
--- mag u = 
-
 -- Record syntax, auto generates functions to lookup fields of the record.
 -- data Person = Person { firstName :: String
 --                      , lastName :: String
