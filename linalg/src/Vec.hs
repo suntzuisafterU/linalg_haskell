@@ -30,6 +30,10 @@ dispColVec :: Vec -> String
 dispColVec (ColumnVec []) = "  ]\n"
 dispColVec (ColumnVec (x:xs)) = " " ++ (show x) ++ "\n" ++ (dispColVec (ColumnVec xs))
 
+-- TODO: implement Vector addition, scalar multiplicatin, subtraction
+-- instance Num Vec where
+--   (+)       = foldr (+) 0 
+
 -- Record syntax, auto generates functions to lookup fields of the record.
 -- data Person = Person { firstName :: String
 --                      , lastName :: String
