@@ -68,27 +68,37 @@ instance Fractional Frac where
 propFrac :: Frac -> (Integer, Frac)
 propFrac x = ((whole x),(fractional x))
 
+-- Why did we give up on implementing Floating?
+-- Because this is NOT a Floating type.  It can easily be converted to one though...
+-- toFloating :: Floating a => Frac -> a
+-- toFloating x = 
+
+instance Floating Frac where
+
 -- Replace required Floating definitions
 -- replaces sqrt,
 fsqrt :: Floating a => Frac -> a
-fsqrt x = (sqrt.toRational') x
+fsqrt x = (sqrt.toFractional) x
 
 -- Trig definitions for magnitude function on Vec data type
 fsin :: Floating a => Frac -> a
-fsin x = (sin.toRational') x
+fsin x = (sin.toFractional) x
 
 fcos :: Floating a => Frac -> a
-fcos x = (cos.toRational') x
+fcos x = (cos.toFractional) x
 
 ftan :: Floating a => Frac -> a
-ftan x = (tan.toRational') x
+ftan x = (tan.toFractional) x
 
 -- convert to Rational number for computations
-toRational' :: Fractional a => Frac -> a
-toRational' x = (((fromIntegral.numerator) x) / ((fromIntegral.denominator) x))
+toFractional :: Fractional a => Frac -> a
+toFractional x = (((fromIntegral.numerator) x) / ((fromIntegral.denominator) x))
+
+toFloat :: Frac -> Float
+toFloat x = (((fromIntegral.numerator) x) / ((fromIntegral.denominator) x))
 
 -- Use Bool operators on the Fractional value of 2 Frac instances
-compareFrac :: Fractional(a) => (a -> a -> Bool) -> Frac -> Frac -> Bool
+compareFrac :: Fractional a => (a -> a -> Bool) -> Frac -> Frac -> Bool
 compareFrac f x y = f (evalFrac x) (evalFrac y)
 
 -- Apply Num operators that require 2 Frac instances in commonDenominator form
