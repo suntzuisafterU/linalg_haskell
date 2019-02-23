@@ -15,9 +15,23 @@ import Frac
 
 spec :: Spec
 spec = do
-  describe "read" $ do
-    it "is the inverse of show" $ property $
-      \x -> (read . show) x == (x :: Int)
+  describe "numerator and denominator functions" $ do
+    it "numerator returns correct Integer" $
+      (numerator (Frac (2,3))) `shouldBe` (2 :: Integer)
+    it "numerator returns negative Integer when Frac created incorrectly" $
+      (numerator (Frac (9,-4))) `shouldBe` (-9 :: Integer)
+    it "denominator returns correct Integer" $
+      (denominator (Frac (9,-4))) `shouldBe` (4 :: Integer)
+  describe "whole and fractional functions" $ do
+    it "whole returns whole portion of Frac as integer" $
+      (whole (Frac (9,4))) `shouldBe` (2 :: Integer)
+    it "whole part of negative Frac is negative" $
+      (whole (Frac (-9,4))) `shouldBe` (-2 :: Integer)
+    it "fractional part of positive Frac is positive" $
+      (fractional (Frac (9,4))) `shouldBe` Frac (1,4)
+    it "negative fractionsl" $
+      (fractional (Frac (-9,4))) `shouldBe` Frac (-1,4)
+
 
   -- describe "Addition" $ do
   --   -- TODO: Figure out how to write good QuickCheck properties

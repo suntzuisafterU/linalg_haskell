@@ -7,26 +7,31 @@ instance Show Frac where
 
 showFrac :: Frac -> String
 showFrac x
+  -- | denominator x == 0  = show (signum x) times infinity -- not implementing
   | denominator x == 1  = show (numerator x)
   | otherwise           = "(" ++ show (numerator x) ++ "/" ++ show (denominator x) ++ ")"
 
 
 numerator :: Frac -> Integer
-numerator (Frac (n, _)) = n
+numerator (Frac (n, d)) = signum (n * d) * (abs n)
 
 denominator :: Frac -> Integer
-denominator (Frac (_, d)) = d
+denominator (Frac (_, d)) = abs d
 
 -- Return whole portion of a Frac instance
 whole :: Frac -> Integer
-whole x = (numerator x) `div` (denominator x)
+whole x = signum (n * d) * (abs n `div` d)
+  where n = numerator x
+        d = denominator x
 
 -- Return fractional portion of a Frac instance
 fractional :: Frac -> Frac
 fractional x = signum x * Frac(
-                (numerator x) `mod` (denominator x),
-                (denominator x)
+                (abs n) `mod` (d),
+                (d)
                )
+  where n = numerator x
+        d = denominator x
 
 instance Eq Frac where
   (==)         = compareFrac (==)
