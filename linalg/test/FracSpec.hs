@@ -31,7 +31,25 @@ spec = do
       (fractional (Frac (9,4))) `shouldBe` Frac (1,4)
     it "negative fractionsl" $
       (fractional (Frac (-9,4))) `shouldBe` Frac (-1,4)
-
+  describe "equality of Fracs" $ do
+    it "Frac is equal to itself" $
+      (Frac (9, 4)) == (Frac (9, 4)) `shouldBe` True
+    it "Frac is not equal to it's negative self" $
+      (Frac (-9, 4)) == (Frac (9,4)) `shouldBe` False
+    it "Frac is equal to it's unsimplified self" $
+      (Frac (2,4)) == (Frac (1,2)) `shouldBe` True
+  describe "Addition on Fracs" $ do
+    it "Fracs that are integers add like integers" $
+      (Frac (2,1)) + (Frac (3,1)) `shouldBe` (Frac (5,1))
+    it "Fracs add to exact values" $
+      (Frac (1,2)) + (Frac (1,3)) `shouldBe` (Frac (5,6))
+    it "Adding negative Fracs is the same as subtraction" $
+      (Frac (-1,2)) + (Frac (-1,3)) `shouldBe` (Frac (-5,6))
+    it "Added Fracs simplify" $
+      (Frac (2,4)) + (Frac (3,9)) `shouldBe` (Frac (5,6))
+  describe "Multiplying Fracs is easy" $ do
+    it "Multiplying" $
+      (Frac (1,2)) * (Frac (1,3)) `shouldBe` (Frac (1,6))
 
   -- describe "Addition" $ do
   --   -- TODO: Figure out how to write good QuickCheck properties
