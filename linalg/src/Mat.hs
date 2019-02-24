@@ -7,17 +7,18 @@ type MatCoeffs = [[ Frac ]]
 
 getMatCoeffs :: Mat -> MatCoeffs
 getMatCoeffs (NormMat c)      = c
-getMatCoeffs (AugmentedMat c) = c
+getMatCoeffs (AugMat c) = c
 
-data Mat = AugmentedMat MatCoeffs | NormMat MatCoeffs
+data Mat = AugMat MatCoeffs | NormMat MatCoeffs
   deriving (Eq)
 
 instance Show Mat where
   show = showMat
 
 showMat :: Mat -> String
-showMat m = foldl (\acc x -> acc ++ (show (RowVec (x))) ++ "\n") "" (getMatCoeffs m)
-
+showMat (NormMat m) = foldl (\acc x -> acc ++ (show (RowVec (x))) ++ "\n") "" m
+showMat (AugMat m) = foldl (\acc x -> acc ++ (showAugRow (RowVec (x))) ++ "\n") "" m
+  where showAugRow (RowVec x) = "[" ++ (foldr (\y accum -> " " ++ (show y) ++ accum) "" (init x)) ++ " | " ++ (show (last x)) ++ " ]"
 
 
 
