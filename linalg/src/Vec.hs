@@ -9,9 +9,12 @@ import Frac
 
 -- type synonym for concise
 type Coeffs = [ Frac ]
+type FCoeffs = [ Float ]
 
 data Vec = ColumnVec Coeffs | RowVec Coeffs
   deriving (Eq)
+
+data FloatingVec = FColumnVec FCoeffs | FRowVec FCoeffs
 
 class ScalarOps a where
   mult :: a -> Frac -> a
@@ -41,7 +44,6 @@ dispColVec (ColumnVec (x:xs)) = " " ++ (show x) ++ "\n" ++ (dispColVec (ColumnVe
 add :: Vec -> Vec -> Vec
 add (ColumnVec u) (ColumnVec v) = (ColumnVec (zipWith (+) u v))
 add (RowVec u) (RowVec v) = (RowVec (zipWith (+) u v))
-
 
 
 -- Record syntax, auto generates functions to lookup fields of the record.

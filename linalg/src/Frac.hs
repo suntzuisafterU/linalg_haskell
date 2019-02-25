@@ -1,16 +1,18 @@
 module Frac where
 
-data Frac = Frac (Integer, Integer)
+data Frac = Frac (Integer, Integer) | FloatingFrac (Float)
 
 instance Show Frac where
   show = showFrac
 
 showFrac :: Frac -> String
-showFrac x
+showFrac (Frac x)
   -- | denominator x == 0  = show (signum x) times infinity -- not implementing
-  | denominator x == 1  = show (numerator x)
-  | otherwise           = "(" ++ show (numerator x) ++ "/" ++ show (denominator x) ++ ")"
-
+  | dx == 1  = show (nx)
+  | otherwise           = "(" ++ show (nx) ++ "/" ++ show (dx) ++ ")"
+    where nx = fst x
+          dx = snd x
+showFrac (FloatingFrac x) = show x
 
 numerator :: Frac -> Integer
 numerator (Frac (n, d)) = signum (n * d) * (abs n)
@@ -43,7 +45,7 @@ instance Ord Frac where
   (>=)         = compareFrac (>=)
 
 instance Real Frac where
-  toRational = \x -> (((fromIntegral.numerator) x) / ((fromIntegral.denominator) x))
+  toRational x = (((fromIntegral.numerator) x) / ((fromIntegral.denominator) x))
 
 instance Num Frac where
   (+)          = commonOperateFrac (+)
@@ -70,8 +72,13 @@ propFrac x = ((whole x),(fractional x))
 
 -- Why did we give up on implementing Floating?
 -- Because this is NOT a Floating type.  It can easily be converted to one though...
--- toFloating :: Floating a => Frac -> a
--- toFloating x = 
+toFloating :: Floating a => Frac -> a
+toFloating x = ( n / d )
+  where n = ( fromIntegral.numerator ) x
+        d = ( fromIntegral.denominator ) x
+
+toFloatingFrac :: Frac -> Frac
+toFloatingFrac x = (FloatingFrac (toFloating x))
 
 instance Floating Frac where
 

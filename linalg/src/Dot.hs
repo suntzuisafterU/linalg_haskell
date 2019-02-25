@@ -10,5 +10,5 @@ mag :: Vec -> Float
 mag u = sqrt (u `dot` u)
 
 -- normalize :: Vec -> Vec
--- normalize v = (1 / (mag v)) * v
+-- normalize v = v `mult` (1 / (mag v))
 
