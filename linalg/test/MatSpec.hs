@@ -5,7 +5,6 @@ module MatSpec (spec) where
 import Test.Hspec
 import Test.QuickCheck
 import Test.QuickCheck.All
-import Frac
 import Vec
 import Mat
 

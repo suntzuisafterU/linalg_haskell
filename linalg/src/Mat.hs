@@ -1,13 +1,12 @@
 module Mat where
 
 import Vec
-import Frac
 
-type MatCoeffs = [[ Frac ]]
+type MatCoeffs = [[ Rational ]]
 
 getMatCoeffs :: Mat -> MatCoeffs
-getMatCoeffs (NormMat c)      = c
-getMatCoeffs (AugMat c) = c
+getMatCoeffs (NormMat c) = c
+getMatCoeffs (AugMat c)  = c
 
 data Mat = AugMat MatCoeffs | NormMat MatCoeffs
   deriving (Eq)

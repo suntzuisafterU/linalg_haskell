@@ -5,7 +5,6 @@ module DotSpec (spec) where
 import Test.Hspec
 import Test.QuickCheck
 import Test.QuickCheck.All
-import Frac
 import Vec
 import Dot
 
@@ -27,10 +26,12 @@ spec = do
       (u `dot` u) > 0 `shouldBe` True
     it "((k * u) + (p * v)) `dot` w == (k * (u `dot` w)) + (p * (u `dot` w))" $
       pendingWith "implement scalar multiplcation and vec addition"
-      -- ((k * u) + (p * v)) `dot` w == (k * (u `dot` w)) + (p * (u `dot` w)) `shouldbe` true
+      -- ((k * u) + (p * v)) `dot` w == (k * (u `dot` w)) + (p `mult` (u `dot` w)) `shouldBe` True
   describe "normalizing" $ do
-    it "normalizing a vector: magnitude equals 1" $
-      pendingWith "requires vector scalar multiplication"
+    it "normalizing a column vector vector: magnitude equals 1" $
+      normalize (ColumnVec [1,-3,4]) `shouldBe` (FColumnVec [(1/(sqrt 26)), (-3/(sqrt 26)), (4/(sqrt 26))])
+    it "normalizing a row vector vector: magnitude equals 1" $
+      normalize (RowVec [1,-3,4]) `shouldBe` (FRowVec [(1/(sqrt 26)), (-3/(sqrt 26)), (4/(sqrt 26))])
   describe "magnitude of a vector u = sqrt (u `dot` u)" $ do
      it "magnitude of [3,4]" $
        mag (ColumnVec [3,4]) `shouldBe` 5

@@ -23,9 +23,9 @@ spec = do
 
   describe "vector scalar multiplication" $ do
     it "column vector scalar multpilcation" $
-      u `mult` 2 `shouldBe` v
+      u `multr` 2 `shouldBe` v
     it "row vector scalar multiplication" $
-      w `mult` 3 `shouldBe` y
+      w `multr` 3 `shouldBe` y
   describe "vector addition" $ do
     it "column vector addition" $
       u `add` v `shouldBe` (ColumnVec [3,6,9])

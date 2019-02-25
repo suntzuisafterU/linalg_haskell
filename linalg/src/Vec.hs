@@ -2,26 +2,27 @@ module Vec where
     -- ( module Frac
     -- ) where
 
-import Frac
+import Data.Ratio
 
 -- TODO: implement a typeclass for Vectors and Matrices together, then one for each separately
 -- class
 
 -- type synonym for concise
-type Coeffs = [ Frac ]
+type Coeffs = [ Rational ]
 type FCoeffs = [ Float ]
 
-data Vec = ColumnVec Coeffs | RowVec Coeffs
+data Vec = ColumnVec Coeffs | RowVec Coeffs | FColumnVec FCoeffs | FRowVec FCoeffs
   deriving (Eq)
 
-data FloatingVec = FColumnVec FCoeffs | FRowVec FCoeffs
-
 class ScalarOps a where
-  mult :: a -> Frac -> a
+  multr :: a -> Rational -> a
+  mult :: a -> Float -> a
 
 instance ScalarOps Vec where
-  mult (RowVec u) x = (RowVec (map (*x) u))
-  mult (ColumnVec u) x = (ColumnVec (map (*x) u))
+  multr (RowVec u) x    = (RowVec (map (*x) u))
+  multr (ColumnVec u) x = (ColumnVec (map (*x) u))
+  mult (RowVec u) x     = (FRowVec (map ((*x).fromRational) u))
+  mult (ColumnVec u) x  = (FColumnVec (map ((*x).fromRational) u))
 
 -- Retrieve the Coeffs for calculations
 getCoeffs :: Vec -> Coeffs
