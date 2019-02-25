@@ -25,8 +25,8 @@ spec = do
     it "u `dot` u > 0 if u is not zero_vec" $
       (u `dot` u) > 0 `shouldBe` True
     it "((k * u) + (p * v)) `dot` w == (k * (u `dot` w)) + (p * (u `dot` w))" $
-      pendingWith "implement scalar multiplcation and vec addition"
-      -- ((k * u) + (p * v)) `dot` w == (k * (u `dot` w)) + (p `mult` (u `dot` w)) `shouldBe` True
+      -- pendingWith "implement scalar multiplcation and vec addition"
+      ((u `mult` k) `add` (v `mult` p)) `dot` w == ((u `dot` w) * k) + ((u `dot` w) * p) `shouldBe` True
   describe "normalizing" $ do
     it "normalizing a column vector vector: magnitude equals 1" $
       normalize (ColumnVec [1,-3,4]) `shouldBe` (FColumnVec [(1/(sqrt 26)), (-3/(sqrt 26)), (4/(sqrt 26))])
@@ -38,11 +38,11 @@ spec = do
      it "magnitude of [2,1,4,2] == 5" $
        mag (ColumnVec [2,1,4,2]) `shouldBe` 5
      it "cauchy swartz inequality: |u `dot` v| <= (mag u) * (mag v)" $
-       abs ( u `dot` v ) <= ( (mag u) * (mag v) ) `shouldBe` True
-        where u = (ColumnVec([2,1,-1]))
-              v = (ColumnVec([1,3,5]))
-              w = (ColumnVec([4,3,2]))
-              z = (ColumnVec([0,0,0]))
-              k = 2
-              p = -3
+       abs ( u `dot` v ) <= ((mag u) * (mag v)) `shouldBe` True
+        where u = (ColumnVec [2,1,-1])
+              v = (ColumnVec [1,3,5])
+              w = (ColumnVec [4,3,2])
+              z = (ColumnVec [0,0,0])
+              k = (2 :: Float)
+              p = (-3 :: Float)
 

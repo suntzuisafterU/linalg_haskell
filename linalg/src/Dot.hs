@@ -3,7 +3,7 @@ module Dot where
 import Vec
 
 dot :: Vec -> Vec -> Float
-dot u v = fromRational ( sum (zipWith (*) (getCoeffs u) (getCoeffs v)) )
+dot u v = fromRational ( sum (zipWith (*) (coeffs u) (coeffs v)) )
 
 mag :: Vec -> Float
 mag u = sqrt (u `dot` u)

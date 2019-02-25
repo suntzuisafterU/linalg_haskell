@@ -11,7 +11,7 @@ import Data.Ratio
 type Coeffs = [ Rational ]
 type FCoeffs = [ Float ]
 
-data Vec = ColumnVec Coeffs | RowVec Coeffs | FColumnVec FCoeffs | FRowVec FCoeffs
+data Vec = ColumnVec {coeffs :: Coeffs} | RowVec {coeffs :: Coeffs} | FColumnVec {fcoeffs :: FCoeffs} | FRowVec {fcoeffs :: FCoeffs}
   deriving (Eq)
 
 class ScalarOps a where
@@ -23,11 +23,6 @@ instance ScalarOps Vec where
   multr (ColumnVec u) x = (ColumnVec (map (*x) u))
   mult (RowVec u) x     = (FRowVec (map ((*x).fromRational) u))
   mult (ColumnVec u) x  = (FColumnVec (map ((*x).fromRational) u))
-
--- Retrieve the Coeffs for calculations
-getCoeffs :: Vec -> Coeffs
-getCoeffs (ColumnVec u) = u
-getCoeffs (RowVec u)    = u
 
 instance Show Vec where
   show = showVec
@@ -45,6 +40,8 @@ dispColVec (ColumnVec (x:xs)) = " " ++ (show x) ++ "\n" ++ (dispColVec (ColumnVe
 add :: Vec -> Vec -> Vec
 add (ColumnVec u) (ColumnVec v) = (ColumnVec (zipWith (+) u v))
 add (RowVec u) (RowVec v) = (RowVec (zipWith (+) u v))
+add (FColumnVec u) (FColumnVec v) = (FColumnVec (zipWith (+) u v))
+add (FRowVec u) (FRowVec v) = (FRowVec (zipWith (+) u v))
 
 
 -- Record syntax, auto generates functions to lookup fields of the record.
