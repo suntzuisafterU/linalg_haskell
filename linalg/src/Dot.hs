@@ -2,6 +2,12 @@ module Dot where
 
 import Vec
 
+-- dot product properties:
+--   pending: basic properties
+--   u `dot` v = ||u|| * ||v|| * cos(theta)
+--
+
+
 dot :: Vec -> Vec -> Float
 dot u v = fromRational ( sum (zipWith (*) (coeffs u) (coeffs v)) )
 
