@@ -9,3 +9,6 @@ dot u v = toFloat ( sum (zipWith (*) (getCoeffs u) (getCoeffs v)) )
 mag :: Vec -> Float
 mag u = sqrt (u `dot` u)
 
+-- normalize :: Vec -> Vec
+-- normalize v = (1 / (mag v)) * v
+

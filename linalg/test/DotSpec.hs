@@ -28,6 +28,9 @@ spec = do
     it "((k * u) + (p * v)) `dot` w == (k * (u `dot` w)) + (p * (u `dot` w))" $
       pendingWith "implement scalar multiplcation and vec addition"
       -- ((k * u) + (p * v)) `dot` w == (k * (u `dot` w)) + (p * (u `dot` w)) `shouldbe` true
+  describe "normalizing" $ do
+    it "normalizing a vector: magnitude equals 1" $
+      pendingWith "requires vector scalar multiplication"
   describe "magnitude of a vector u = sqrt (u `dot` u)" $ do
      it "magnitude of [3,4]" $
        mag (ColumnVec [3,4]) `shouldBe` 5

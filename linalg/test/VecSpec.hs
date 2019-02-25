@@ -22,8 +22,19 @@ spec = do
       (RowVec [1,3,2]) == (RowVec [1,2,3]) `shouldBe` False
 
   describe "vector scalar multiplication" $ do
-    it "scalar multpilcation" $
-      pendingWith "implment scalar multi"
+    it "column vector scalar multpilcation" $
+      u `mult` 2 `shouldBe` v
+    it "row vector scalar multiplication" $
+      w `mult` 3 `shouldBe` y
+  describe "vector addition" $ do
+    it "column vector addition" $
+      u `add` v `shouldBe` (ColumnVec [3,6,9])
+    it "row vector additon" $
+      w `add` y `shouldBe` (RowVec [12,16,20])
+        where u = (ColumnVec [1,2,3])
+              v = (ColumnVec [2,4,6])
+              w = (RowVec [3,4,5])
+              y = (RowVec [9,12,15])
 
 
 

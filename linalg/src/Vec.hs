@@ -13,6 +13,13 @@ type Coeffs = [ Frac ]
 data Vec = ColumnVec Coeffs | RowVec Coeffs
   deriving (Eq)
 
+class ScalarOps a where
+  mult :: a -> Frac -> a
+
+instance ScalarOps Vec where
+  mult (RowVec u) x = (RowVec (map (*x) u))
+  mult (ColumnVec u) x = (ColumnVec (map (*x) u))
+
 -- Retrieve the Coeffs for calculations
 getCoeffs :: Vec -> Coeffs
 getCoeffs (ColumnVec u) = u
@@ -30,9 +37,12 @@ dispColVec :: Vec -> String
 dispColVec (ColumnVec []) = "  ]\n"
 dispColVec (ColumnVec (x:xs)) = " " ++ (show x) ++ "\n" ++ (dispColVec (ColumnVec xs))
 
--- TODO: implement Vector addition, scalar multiplicatin, subtraction
--- instance Num Vec where
---   (+)       = foldr (+) 0 
+-- Vector addition
+add :: Vec -> Vec -> Vec
+add (ColumnVec u) (ColumnVec v) = (ColumnVec (zipWith (+) u v))
+add (RowVec u) (RowVec v) = (RowVec (zipWith (+) u v))
+
+
 
 -- Record syntax, auto generates functions to lookup fields of the record.
 -- data Person = Person { firstName :: String
