@@ -11,7 +11,7 @@ import Data.Ratio
 type Coeffs = [ Rational ]
 type FCoeffs = [ Float ]
 
-data Vec = ColumnVec {coeffs :: Coeffs} | RowVec {coeffs :: Coeffs} | FColumnVec {fcoeffs :: FCoeffs} | FRowVec {fcoeffs :: FCoeffs}
+data Vec a = ColumnVec [a] | RowVec [a]
   deriving (Eq)
 
 class ScalarOps a where
