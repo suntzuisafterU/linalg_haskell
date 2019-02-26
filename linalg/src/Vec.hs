@@ -39,6 +39,9 @@ add :: Num a => (Vec a) -> (Vec a) -> (Vec a)
 add (ColumnVec u) (ColumnVec v) = (ColumnVec (zipWith (+) u v))
 add (RowVec u) (RowVec v) = (RowVec (zipWith (+) u v))
 
+-- Check if a vector is the zero vector.
+isZeroVec :: Vec -> Bool
+isZeroVec = all (==0)
 
 -- Record syntax, auto generates functions to lookup fields of the record.
 -- data Person = Person { firstName :: String

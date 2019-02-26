@@ -18,6 +18,9 @@ spec = do
       (ColumnVec [0,0,0]) `dot` (ColumnVec [1,2,3]) `shouldBe` 0
     it "[1,2,3] `dot` [4,5,6] `shouldBe` 32" $
       (ColumnVec [1,2,3]) `dot` (RowVec [4,5,6]) `shouldBe` 32
+  describe "are two vectors perpendicular" $ do
+    it "Zero vector, false or error?" $
+      pendingWith "Specification requires decision on throwing an error or returning false when given a zero vector"
 
   describe "properties of dot product" $ do
     it "u `dot` v == v `dot` u" $

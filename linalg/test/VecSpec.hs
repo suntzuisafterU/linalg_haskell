@@ -21,6 +21,12 @@ spec = do
     it "RowVecs with the same entries in a different order should NOT be equal" $
       (RowVec [1,3,2]) == (RowVec [1,2,3]) `shouldBe` False
 
+  describe "check if a vector is the zero vector" $ do
+    it "is zero vector" $
+      isZeroVec (RowVec [0,0,0]) `shouldBe` True
+    it "is not the zero vector" $
+      isZeroVec (ColumnVec [-1,0,1]) `shouldBe` False
+
   describe "vector scalar multiplication" $ do
     it "column vector scalar multpilcation" $
       u `multr` 2 `shouldBe` v
