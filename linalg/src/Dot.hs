@@ -55,10 +55,10 @@ normalize v = v `mult` (1 / (mag v))
 -- arePerpendicular :: Vec -> Vec -> Bool -- TODO: should this throw an error if we get a zero vector? As opposed to just reporting false?
 -- arePerpendicular u v = (not.isZeroVec u) && (not.isZeroVec v) && (u `dot` v) == 0
 
--- The projection of a vector u onto the vector v is defined by a vector that is a scalar product of u and whose point is positioned so that
+-- The projection of a vector v onto the vector u is defined by a vector that is a scalar product of u and whose point is positioned so that
 -- a vector from that point to v would be perpendicular to v.  These 2 new vectors together form a right angle triangle.
--- The formula for the projection of u onto v is:
---       proj(u -> v) = k*u, where k = ((v `dot` u)/||u||^2)
+-- The formula for the projection of v onto u is:
+--       proj(v -> u) = k*u, where k = ((v `dot` u)/||u||^2)
 -- note that the form k*u informs us that the resulting vector is in the same direction as u.
 -- The presence of ||u||^2 in the denominator of k means that as u gets longer, the projection gets shorter.
 -- Also, since v is only present in the denominator, and only influences k, the closer the two vectors are to pointing in the same direction,
