@@ -9,6 +9,13 @@ module SysOfEqn where
 --                       homogenous system of equations.
 -- showAsVectors :: Sys -> IO()
 
+-- The basic solution of a system are columns constructed from the coefficients on parameters in the solution.
+-- The basic solutions are often represented by X₁, X₂, etc.
+-- NOTE: on page 29, example 1.30 of text.  TODO: Remove references to text
+-- showBasicSolution :: Sys -> IO()
+
+-- show
+
 -- A systen of equations is homogenous when all of its formulas are set equal to zero.
 -- This corresponds to the equation AX = B where
 --   A = coefficient matrix
@@ -54,7 +61,7 @@ module SysOfEqn where
 -- Since homogenous systems always have the trivial solution, we consider consistence mainly for heterogenous systems.
 -- A heterogenous system without a row of zeroes will ALWAYS be consistent.
 -- isConsistent :: Sys -> Bool
--- isConsistent s = (isHomogenouse) || (not.hasRowOfZeroes)
+-- isConsistent s = (isHomogenouse) || (not.hasRowOfZeroes -- with a non-zero augmented value)
 
 -- A system of equations is inconsistent if it is heterogenous (and therefor does not have the trivial solution)
 -- and it also does not have the non-trivial solution.

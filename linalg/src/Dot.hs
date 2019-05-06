@@ -5,11 +5,6 @@ import Vec
 -- dot product properties:
 --   pending: basic properties
 --
---   Finding included angle with the dot product
---                u `dot` v  = ||u|| * ||v|| * cos(theta)
---      therefor: cos(theta) = (u `dot` v)/(||u|| * ||v||)
---           and: theta      = arccos(u `dot` v)/(||u|| * ||v||)
---
 
 
 -- u `dot` v = the sum from i=1 to k of v_subscript_i * u_subscript_i
@@ -34,6 +29,14 @@ dot u v = fromRational ( sum (zipWith (*) (coeffs u) (coeffs v)) )
 -- product.  Then take the sqrt and we are done.
 mag :: Vec -> Float
 mag u = sqrt (u `dot` u)
+
+-- The included angle between two vectors is calculated by:
+--              u `dot` v  = ||u|| * ||v|| * cos(theta)
+--    therefor: cos(theta) = (u `dot` v)/(||u|| * ||v||)
+--         and: theta      = arccos(u `dot` v)/(||u|| * ||v||)
+--
+-- includedAngle :: Vec -> Vec -> Float
+
 
 -- This function is important, but also requires support of floating point numbers in
 -- our Matrices and Vectors, unless we come up with a more robust exact value representation
